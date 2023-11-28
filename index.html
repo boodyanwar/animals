@@ -9,41 +9,31 @@
     padding: 30px;
   }
   
-  article2 {
-    float: right;
-    width: auto;
-    background-color: silver;
-    height: auto;
-    color: black;
-    font-size: 15px;
-    padding: 30px;
-  }
-
   
-
-  article3 {
-    background-color: silver;
-    padding: 30px;
-    float: left;
-    font-size: 15px;
-    width: auto;
-    height: auto;
-    color: black;
-  }
-
-  article4 {
-    background-color: blanchedalmond;
-    padding: 30px;
-    float: right;
-    font-size: 15px;
-    width: auto;
-    height: auto;
-    color: black;
-  }
-
   button:hover {
     color: orangered;
-    margin-top: 5px; 
+    margin-top: 5px;
+    box-shadow:  5px 5px gray;
+  }
+  div {
+    width: 100px;
+    height: 100px;
+    transition: width 2s;
+    text-align: center;
+  }
+  div:hover {
+    width: 60%;
+    height: 75%;
+  }
+  img {
+    opacity: 0.2;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    
+  }
+  img:hover {
+    opacity: 1;
   }
 </style>
 
@@ -60,15 +50,15 @@
 
 
     <article>
-      <body style="background-color: white;">
+      <body style="background-image: white;">
         <p style="color: black; text-align: center; border: auto solid yellow;"><b>
     There are types of animals. Land Animals and Water Animals.
     </article>
-    
+  <div>
     <img src="images/zebra.jpeg" style="width:48%; text-align:left; height:55%;">
     <img src="images/giraffe.jpeg" style="width:48%; text-align:left; height:55%;">
     <img src="images/el.jpeg" style="width:50%; text-align:left; height:55%;">
-    
+  </div>
  
   
   

@@ -1,0 +1,38 @@
+<style>
+  article {
+    float: center;
+    width: auto;
+    background-color: blanchedalmond;
+    height: auto;
+    color: white;
+    font-size: 15px;
+    padding: 30px;
+  }
+  
+  
+  button:hover {
+    color: orangered;
+    margin-top: 5px;
+    box-shadow:  5px 5px gray;
+  }
+  div {
+    width: 100px;
+    height: 100px;
+    transition: width 2s;
+    text-align: center;
+  }
+  div:hover {
+    width: 60%;
+    height: 75%;
+  }
+  img {
+    opacity: 0.2;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    
+  }
+  img:hover {
+    opacity: 1;
+  }
+</style>
