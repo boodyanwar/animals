@@ -1,3 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 50px;
+        }
+        #weather {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .loading {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Weather in Your Location</h1>
+<div id="weather">
+    <p class="loading">Loading weather information...</p>
+</div>
+
+<script>
+    const apiKey = '9c3577636f489e6d1ee2dccf4c0972a8'; // Replace with your OpenWeatherMap API key
+
+    // Get user's location
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getWeather, showError);
+        } else {
+            document.getElementById('weather').innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    // Fetch weather data from OpenWeatherMap API
+    function getWeather(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => displayWeather(data))
+            .catch(error => {
+                document.getElementById('weather').innerHTML = "Unable to retrieve weather information.";
+            });
+    }
+
+    // Display weather information
+    function displayWeather(data) {
+        const weatherElement = document.getElementById('weather');
+        const location = data.name;
+        const temp = data.main.temp;
+        const description = data.weather[0].description;
+
+        weatherElement.innerHTML = `
+            <h2>${location}</h2>
+            <p>Temperature: ${temp}°C</p>
+            <p>Condition: ${description}</p>
+        `;
+    }
+
+    // Handle location errors
+    function showError(error) {
+        let message;
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                message = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                message = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                message = "An unknown error occurred.";
+                break;
+        }
+        document.getElementById('weather').innerHTML = message;
+    }
+
+    // Call the function to get location on page load
+    window.onload = getLocation;
+</script>
+
+
 <style>
   article {
     float: center;
@@ -7,13 +104,16 @@
     color: white;
     font-size: 15px;
     padding: 30px;
+    
   }
-  
+  a {
+    width: 20%;
+  }
   
   button:hover {
     color: orangered;
     margin-top: 5px;
-    box-shadow:  5px 5px gray;
+    box-shadow:  5px 5px whitesmoke;
   }
   div {
     width: 100px;
@@ -35,13 +135,14 @@
   img:hover {
     opacity: 1;
   }
+  
 </style>
 
-<a style="float: right; margin-right: 1%; "href="soundofanimals.html"><b><button style="background-color: white;">Sound of Animals</button></b></a>
-<a style="float: right; margin-right: 1%; "href="wateranimals.html"><b><button style="background-color: white;">Water Animals</button></b></a>
+<a style="float: right; margin-right: 4%; "href="soundofanimals.html"><b><button style="background-color: black;  color: white;" class="container2">Sound of Animals</button></b></a>
+<a style="float: right; margin-right: 4%; "href="wateranimals.html"><b><button style="background-color: black;  color: white;" class="container2">Water Animals</button></b></a>
 
-<a style="float: right; margin-right: 1%; "href="landanimals.html"><b><button style="background-color: white;">Land Animals</button></b></a>
-<a style="float: right; margin-right: 1%; "href="index.html"><b><button style="background-color: white;">Home</button></b></a>
+<a style="float: right; margin-right: 4%; "href="landanimals.html"><b><button style="background-color: black;  color: white;" class="container2">Land Animals</button></b></a>
+<a style="float: right; margin-right: 4%; "href="index.html"><b><button style="background-color: black;  color: white;" class="container2">Home</button></b></a>
 
 
     
@@ -50,7 +151,7 @@
 
 
     <article>
-      <body style="background-image: white;">
+      <body style="background-image: white;"  class="container">
         <p style="color: black; text-align: center; border: auto solid yellow;"><b>
     There are types of animals. Land Animals and Water Animals.
     </article>
@@ -60,5 +161,8 @@
     <img src="images/el.jpeg" style="width:50%; text-align:left; height:55%;">
   </div>
  
+</body>
+</html>
+
   
   
