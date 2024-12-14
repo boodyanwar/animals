@@ -1,81 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 50px;
+        }
+        #weather {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .loading {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Weather in Your Location</h1>
+<div id="weather">
+    <p class="loading">Loading weather information...</p>
+</div>
+
+<script>
+    const apiKey = '9c3577636f489e6d1ee2dccf4c0972a8'; // Replace with your OpenWeatherMap API key
+
+    // Get user's location
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getWeather, showError);
+        } else {
+            document.getElementById('weather').innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    // Fetch weather data from OpenWeatherMap API
+    function getWeather(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => displayWeather(data))
+            .catch(error => {
+                document.getElementById('weather').innerHTML = "Unable to retrieve weather information.";
+            });
+    }
+
+    // Display weather information
+    function displayWeather(data) {
+        const weatherElement = document.getElementById('weather');
+        const location = data.name;
+        const temp = data.main.temp;
+        const description = data.weather[0].description;
+
+        weatherElement.innerHTML = `
+            <h2>${location}</h2>
+            <p>Temperature: ${temp}°C</p>
+            <p>Condition: ${description}</p>
+        `;
+    }
+
+    // Handle location errors
+    function showError(error) {
+        let message;
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                message = "User denied the request for Geolocation.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "Location information is unavailable.";
+                break;
+            case error.TIMEOUT:
+                message = "The request to get user location timed out.";
+                break;
+            case error.UNKNOWN_ERROR:
+                message = "An unknown error occurred.";
+                break;
+        }
+        document.getElementById('weather').innerHTML = message;
+    }
+
+    // Call the function to get location on page load
+    window.onload = getLocation;
+</script>
+
+
 <style>
   article {
-    float: left;
+    float: center;
     width: auto;
     background-color: blanchedalmond;
     height: auto;
     color: white;
     font-size: 15px;
     padding: 30px;
+    
+  }
+  a {
+    width: 20%;
   }
   
-  article2 {
-    float: right;
-    width: auto;
-    background-color: silver;
-    height: auto;
-    color: black;
-    font-size: 15px;
-    padding: 30px;
-  }
-
-  
-
-  article3 {
-    background-color: silver;
-    padding: 30px;
-    float: left;
-    font-size: 15px;
-    width: auto;
-    height: auto;
-    color: black;
-  }
-
-  article4 {
-    background-color: blanchedalmond;
-    padding: 30px;
-    float: right;
-    font-size: 15px;
-    width: auto;
-    height: auto;
-    color: black;
-  }
-
   button:hover {
     color: orangered;
-    margin-top: 5px; 
+    margin-top: 5px;
+    box-shadow:  5px 5px whitesmoke;
   }
+  div {
+    width: 100px;
+    height: 100px;
+    transition: width 1.5s ease-in-out;
+    text-align: center;
+  }
+  div:hover {
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    opacity: 0.2;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    
+  }
+  img:hover {
+    opacity: 1;
+  }
+  
 </style>
-<a style="float: right; margin-right: 20px; "href="contactus.html"><b><button style="background-color: white;">Contact Us</button></b></a>
-<a style="float: right; margin-right: 20px; "href="soundofanimals.html"><b><button style="background-color: white;">Sound of Animals</button></b></a>
-<a style="float: right; margin-right: 20px; "href="wateranimals.html"><b><button style="background-color: white;">Water Animals</button></b></a>
 
-<a style="float: right; margin-right: 20px; "href="landanimals.html"><b><button style="background-color: white;">Land Animals</button></b></a>
-<a style="float: right; margin-right: 20px; "href="index.html"><b><button style="background-color: white;">Home</button></b></a>
+<a style="float: right; margin-right: 4%; "href="soundofanimals.html"><b><button style="background-color: black;  color: white;" class="container2">Sound of Animals</button></b></a>
+<a style="float: right; margin-right: 4%; "href="wateranimals.html"><b><button style="background-color: black;  color: white;" class="container2">Water Animals</button></b></a>
+
+<a style="float: right; margin-right: 4%; "href="landanimals.html"><b><button style="background-color: black;  color: white;" class="container2">Land Animals</button></b></a>
+<a style="float: right; margin-right: 4%; "href="index.html"><b><button style="background-color: black;  color: white;" class="container2">Home</button></b></a>
 
 
     
 <h1 style="text-align: center; padding-top: 50px;">ANIMALS</h1>
 <hr style="width: 30%; margin-bottom: 30px;">
-    
-    
-    
+
+
     <article>
-      <body style="background-color: white;">
-        <p style="color: black;"><b>
-    Land Animals are the animals that can move on land like, Cheetahs, Lions, Tiger and all of those animals. There are animals that can move very fast like the cheetahs. Cheetahs are the fastest land animals on earth <button type="button" onclick="alert('Cheetahs are the fastest land aniamls on earth. Their speed can reach 120 km per h. They have natural camouflage. Their eyes can see 5km long. They accelerate from 0 to 100 in 3 seconds and 3 strides. Cheetahs can not roar they meow')">To know more info about the cheetahs click on the button.</button> Their speed can reach 120 km per h. There are also strong land animals like the elephant. The Elephant is the strongest mammal on the earth. The mammal animals are the animals that give birth, but reptile is the animal that lays eggs.</b></p></body>  
+      <body style="background-image: white;"  class="container">
+        <p style="color: black; text-align: center; border: auto solid yellow;"><b>
+    There are types of animals. Land Animals and Water Animals.
     </article>
-    <article2>
-      <p style="color:black;"><b>Water Animals are the animals that can live in water like the sailfish, the great shark and the blue whale those are examples of water animals. The fastest fish  is the sailfish. Their speed can reach 110 km per h. The tallest water animal is the blue whale. Did you know that the blue whale can be 33 meters long!</b></p>
-    </article2>
-    <article3>
-      <p style="color: black;"><b>There are also beautiful land animals like the tigers, black panther, dogs and cats. Did you know that the Tigers are stronger than the Lions!  Did you know that the Crocodiles can live in water and they can also live on land, the crocodiles are amazing animals!</b></p>
-    </article3>
-    <article4>
-      <p style="color: black;"><b>Also water animals are beautiful like Jellyfish, Starfish, Seahorse and the Blue Whale. Take care of the Jellyfish becuase, if you touched it, you will be hurted. Did you know that the Blue Whale is the tallest animal on earth! If you are swimming in the sea, just take care of the great shark. It has more than 4,000 teeth.</b></p>
-    </article4>
-    
-    
+  <div>
+    <img src="images/zebra.jpeg" style="width:48%; text-align:left; height:55%;">
+    <img src="images/giraffe.jpeg" style="width:48%; text-align:left; height:55%;">
+    <img src="images/el.jpeg" style="width:50%; text-align:left; height:55%;">
+  </div>
  
+</body>
+</html>
+
   
   
